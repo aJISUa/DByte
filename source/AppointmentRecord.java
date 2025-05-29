@@ -4,12 +4,11 @@ import java.util.Scanner;
 
 /*통합 DB 완성하면 변수 수정해야 할 것 같습니다 ㅜ DB에는 user_id라고 저장했어요..
  * 
- * 지금 기본키(상담 기록 id)가 다 하고 있기는 해요..그래서 이것도 규칙을 바꾸는 게 나을 것 같기도 합니다.
- * 기관id-유저id-num이나 9000번대 시작 뭐 이렇게..? 그리고 date 추가 여부
+ * 90000 그리고 date 추가
  * */
 
 public class AppointmentRecord {
-	  static final String DB_URL = "jdbc:mysql://localhost:3306/dbyte?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/dbyte?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC";
     static final String DB_USER = "testuser";
     static final String DB_PASSWORD = "testpw";
 
