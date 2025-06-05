@@ -136,8 +136,12 @@ public class Gui extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				typeScroll.setVisible(false);
 				districtScroll.setVisible(false);
+				tableModel.setColumnIdentifiers(new String[] {"기관명", "주소", "전화번호"});
 				tableModel.setRowCount(0);
-                Object[][] data = SearchGUI.getAllInstitution();
+				table.getColumnModel().getColumn(0).setPreferredWidth(100);
+				table.getColumnModel().getColumn(1).setPreferredWidth(250);
+				table.getColumnModel().getColumn(2).setPreferredWidth(150);
+				Object[][] data = SearchGUI.getAllInstitution();
                 for (Object[] row : data) {
                     tableModel.addRow(row);
                 }
@@ -169,8 +173,12 @@ public class Gui extends JFrame {
 			if (!e.getValueIsAdjusting()) {
 				String selected = (String) typeList.getSelectedValue();
 				if (!selected.equals("(select)") && selected != null) {
+					tableModel.setColumnIdentifiers(new String[] {"기관명", "주소", "전화번호"});
 					tableModel.setRowCount(0);
-	                Object[][] data = SearchGUI.getInstitutionByType(selected);
+					table.getColumnModel().getColumn(0).setPreferredWidth(100);
+					table.getColumnModel().getColumn(1).setPreferredWidth(250);
+					table.getColumnModel().getColumn(2).setPreferredWidth(150);
+					Object[][] data = SearchGUI.getInstitutionByType(selected);
 	                for (Object[] row : data) {
 	                    tableModel.addRow(row);
 	                }
@@ -197,7 +205,11 @@ public class Gui extends JFrame {
 			if (!e.getValueIsAdjusting()) {
 				String selected = (String) districtList.getSelectedValue();
 				if (!selected.equals("(select)") && selected != null) {
+					tableModel.setColumnIdentifiers(new String[] {"기관명", "주소", "전화번호"});
 					tableModel.setRowCount(0);
+					table.getColumnModel().getColumn(0).setPreferredWidth(100);
+					table.getColumnModel().getColumn(1).setPreferredWidth(250);
+					table.getColumnModel().getColumn(2).setPreferredWidth(150);
 					Object[][] data = SearchGUI.getInstitutionByDistrict(selected);
 	                for (Object[] row : data) {
 	                    tableModel.addRow(row);
