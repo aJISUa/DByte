@@ -371,9 +371,7 @@ public class MainGUI {
 		        	
 		            btn1.setText("소속 기관 상담 기록 전체 조회");
 		            btn1.setVisible(true);
-		            btn1.addActionListener(e1 -> {
-		            	new AppointmentRecordGUI(userId).setVisible(true);
-		            });
+		            btn1.addActionListener(e1 -> {});
 
 		            btn2.setText("상담 기록 등록");
 		            btn2.setVisible(true);
