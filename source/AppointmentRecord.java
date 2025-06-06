@@ -2,9 +2,8 @@
 import java.sql.*;
 import java.util.Scanner;
 
-/*통합 DB 완성하면 변수 수정해야 할 것 같습니다 ㅜ DB에는 user_id라고 저장했어요..
- * 
- * 90000 그리고 date 추가
+/*
+콘솔 통합 버전 코드를 사용할 것!
  * */
 
 public class AppointmentRecord {
