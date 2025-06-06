@@ -1,11 +1,12 @@
+package view;
+//제가 환자랑 의료진 메뉴가 달라서 다른 기능에 setVisible(true) 처리 했습니다ㅜㅜ
+import view.AppointmentRecordGUI;
 import java.awt.EventQueue;
 import java.util.Scanner;
 
 import javax.swing.*;
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JMenu;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.ActionListener;
@@ -168,6 +169,11 @@ public class MainGUI {
 		                    "알림",
 		                    JOptionPane.INFORMATION_MESSAGE);
 		            userId = -1;
+		            
+		            
+		            //상담 기록에서 로그아웃하면 원래 메뉴가 남아 있어서 로그아웃하면 초기화 추가
+		            menuNum = -1;
+		            updateUI();
 		        } else {
 		            JOptionPane.showMessageDialog(frame,
 		                    "[SYSTEM] 로그인 상태가 아닙니다.",
@@ -217,26 +223,31 @@ public class MainGUI {
 
 
 		        btn1.setLabel("전체 기관 조회");
+		        btn1.setVisible(true);
 		        btn1.addActionListener(e1 -> {
 		            // TODO: 전체 기관 조회 기능
 		        });
 
 		        btn2.setLabel("기관 타입별 조회");
+		        btn2.setVisible(true);
 		        btn2.addActionListener(e1 -> {
 		            // TODO: 기관 타입별 조회 기능
 		        });
 
 		        btn3.setLabel("지역별 기관 조회");
+		        btn3.setVisible(true);
 		        btn3.addActionListener(e1 -> {
 		            // TODO: 지역별 조회 기능
 		        });
 
 		        btn4.setLabel("평균 평점보다 높은 기관 조회");
+		        btn4.setVisible(true);
 		        btn4.addActionListener(e1 -> {
 		            // TODO: 평균 평점보다 높은 기관 조회
 		        });
 
 		        btn5.setLabel("뒤로 가기");
+		        btn5.setVisible(true);
 		        btn5.addActionListener(e1 -> {
 		            menuNum = -1;
 		            updateUI();
@@ -271,26 +282,31 @@ public class MainGUI {
 
 
 		        btn1.setLabel("리뷰 전체 조회 (기관 평균 평점 및 순위)");
+		        btn1.setVisible(true);
 		        btn1.addActionListener(e1 -> {
 		            // TODO: 전체 리뷰 조회
 		        });
 
 		        btn2.setLabel("리뷰 등록");
+		        btn2.setVisible(true);
 		        btn2.addActionListener(e1 -> {
 		            // TODO: 리뷰 등록
 		        });
 
 		        btn3.setLabel("리뷰 수정");
+		        btn3.setVisible(true);
 		        btn3.addActionListener(e1 -> {
 		            // TODO: 리뷰 수정
 		        });
 
 		        btn4.setLabel("리뷰 삭제");
+		        btn4.setVisible(true);
 		        btn4.addActionListener(e1 -> {
 		            // TODO: 리뷰 삭제
 		        });
 
 		        btn5.setLabel("기관별 리뷰 통계 조회");
+		        btn5.setVisible(true);
 		        btn5.addActionListener(e1 -> {
 		            // TODO: 기관별 통계
 		        });
@@ -327,30 +343,68 @@ public class MainGUI {
 		        for (ActionListener al : btn6.getActionListeners()) btn6.removeActionListener(al);
 		        for (ActionListener al : btn7.getActionListeners()) btn7.removeActionListener(al);
 
-
-		        btn1.setLabel("");
 		        btn1.setVisible(false);
-
-		        btn2.setLabel("");
 		        btn2.setVisible(false);
-
-		        btn3.setLabel("");
 		        btn3.setVisible(false);
-
-		        btn4.setLabel("");
 		        btn4.setVisible(false);
-
-		        btn5.setLabel("");
 		        btn5.setVisible(false);
-
-		        btn6.setLabel(""); // 필요 없는 경우 label 제거
 		        btn6.setVisible(false);
-
-		        btn7.setLabel("");
 		        btn7.setVisible(false);
+		        
+		        if (userId == -1) { // 로그인 안 된 상태 -- 본인 인증 느낌
+		            JOptionPane.showMessageDialog(frame, "로그인 후 이용해주세요.", "안내", JOptionPane.INFORMATION_MESSAGE);
+		            menuNum = -1;
+		        } else if (userId < 20000) { // 환자 (userId < 20000)
+		        	
+		            btn1.setText("나의 상담 기록 조회");
+		            btn1.setVisible(true);
+		            btn1.addActionListener(e1 -> {
+		            	AppointmentRecordGUI arf = new AppointmentRecordGUI(userId);
+		            	arf.setVisible(true);
+		            });
 
+		            btn2.setText("뒤로 가기");
+		            btn2.setVisible(true);
+		            btn2.addActionListener(e1 -> {
+		                menuNum = -1;
+		                updateUI();
+		            });
+		  
+		        } else { // 의료인 (userId >= 20000)
+		        	
+		            btn1.setText("소속 기관 상담 기록 전체 조회");
+		            btn1.setVisible(true);
+		            btn1.addActionListener(e1 -> {
+		            	new AppointmentRecordGUI(userId).setVisible(true);
+		            });
+
+		            btn2.setText("상담 기록 등록");
+		            btn2.setVisible(true);
+		            btn2.addActionListener(e1 -> {});
+
+		            btn3.setText("상담 기록 수정");
+		            btn3.setVisible(true);
+		            btn3.addActionListener(e1 -> {});
+
+		            btn4.setText("상담 기록 삭제");
+		            btn4.setVisible(true);
+		            btn4.addActionListener(e1 -> {});
+		            
+		            btn5.setText("내원자 트래킹 정보 조회");
+		            btn5.setVisible(true);
+		            btn5.addActionListener(e1 -> {});
+
+
+		            btn6.setText("뒤로 가기");
+		            btn6.setVisible(true);
+		            btn6.addActionListener(e1 -> {
+		                menuNum = -1;
+		                updateUI();
+		            });
+		        }
 		        updateUI();
 		    }
+		    
 		});
 		menu.add(appointementBtn);
 	
