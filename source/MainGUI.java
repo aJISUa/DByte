@@ -356,11 +356,11 @@ public class MainGUI {
 		            menuNum = -1;
 		        } else if (userId < 20000) { // 환자 (userId < 20000)
 		        	
-		            btn1.setText("나의 상담 기록 조회");
+		            btn1.setLabel("나의 상담 기록 조회");
 		            btn1.setVisible(true);
 		            btn1.addActionListener(e1 -> {});
 
-		            btn2.setText("뒤로 가기");
+		            btn2.setLabel("뒤로 가기");
 		            btn2.setVisible(true);
 		            btn2.addActionListener(e1 -> {
 		                menuNum = -1;
@@ -369,28 +369,30 @@ public class MainGUI {
 		  
 		        } else { // 의료인 (userId >= 20000)
 		        	
-		            btn1.setText("소속 기관 상담 기록 전체 조회");
+		            btn1.setLabel("소속 기관 상담 기록 전체 조회");
 		            btn1.setVisible(true);
-		            btn1.addActionListener(e1 -> {});
+		            btn1.addActionListener(e1 -> {
+		            	AppointmentRecordsql.getRecordsByUser(userId);
+		            });
 
-		            btn2.setText("상담 기록 등록");
+		            btn2.setLabel("상담 기록 등록");
 		            btn2.setVisible(true);
 		            btn2.addActionListener(e1 -> {});
 
-		            btn3.setText("상담 기록 수정");
+		            btn3.setLabel("상담 기록 수정");
 		            btn3.setVisible(true);
 		            btn3.addActionListener(e1 -> {});
 
-		            btn4.setText("상담 기록 삭제");
+		            btn4.setLabel("상담 기록 삭제");
 		            btn4.setVisible(true);
 		            btn4.addActionListener(e1 -> {});
 		            
-		            btn5.setText("내원자 트래킹 정보 조회");
+		            btn5.setLabel("내원자 트래킹 정보 조회");
 		            btn5.setVisible(true);
 		            btn5.addActionListener(e1 -> {});
 
 
-		            btn6.setText("뒤로 가기");
+		            btn6.setLabel("뒤로 가기");
 		            btn6.setVisible(true);
 		            btn6.addActionListener(e1 -> {
 		                menuNum = -1;
