@@ -358,10 +358,7 @@ public class MainGUI {
 		        	
 		            btn1.setText("나의 상담 기록 조회");
 		            btn1.setVisible(true);
-		            btn1.addActionListener(e1 -> {
-		            	AppointmentRecordGUI arf = new AppointmentRecordGUI(userId);
-		            	arf.setVisible(true);
-		            });
+		            btn1.addActionListener(e1 -> {});
 
 		            btn2.setText("뒤로 가기");
 		            btn2.setVisible(true);
