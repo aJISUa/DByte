@@ -1,4 +1,3 @@
-// AppointmentRecordDAO.java
 package view;
 
 import java.sql.*;
@@ -126,13 +125,13 @@ public class AppointmentRecordsql {
     }
 
     private static boolean hasAllergyConflict(Connection conn, int appointmentId, String prescription) throws SQLException {
-        String sql = "SELECT p.allergies FROM Patient p JOIN AppointmentRecord ar ON p.userId = ar.userId WHERE ar.appointmentId = ?";
+        String sql = "SELECT p.allergy FROM Patient p JOIN AppointmentRecord ar ON p.userId = ar.userId WHERE ar.appointmentId = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, appointmentId);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                String allergies = rs.getString("allergies");
-                return allergies != null && allergies.toLowerCase().contains(prescription.toLowerCase());
+                String allergy = rs.getString("allergy");
+                return allergy != null && allergy.toLowerCase().contains(prescription.toLowerCase());
             }
         }
         return false;
