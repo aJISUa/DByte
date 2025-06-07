@@ -2,7 +2,7 @@ import java.sql.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class ReviewGUI {
+public class Review {
     static final String dbID = "testuser";
     static final String dbPW = "testpw";
     static final String dbName = "mindlink";
