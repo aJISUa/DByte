@@ -1,5 +1,5 @@
 import java.sql.*;
-import java.math.BigDecimal;
+
 import java.util.ArrayList;
 
 public class Review {
@@ -56,7 +56,7 @@ public class Review {
     }
 
     // 3. 리뷰 수정
-    public static boolean updateReview(BigDecimal reviewId, String newContent, int newRating) {
+    public static boolean updateReview(int reviewId, String newContent, int newRating) {
         if (!validateRating(newRating) || newContent == null || newContent.trim().isEmpty()) {
             return false;
         }
@@ -65,7 +65,7 @@ public class Review {
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, newContent.trim());
             pstmt.setInt(2, newRating);
-            pstmt.setBigDecimal(3, reviewId);
+            pstmt.setInt(3, reviewId);
             int result = pstmt.executeUpdate();
             return result > 0;
         } catch (SQLException e) {
@@ -75,11 +75,11 @@ public class Review {
     }
 
     // 4. 리뷰 삭제
-    public static boolean deleteReview(BigDecimal reviewId) {
+    public static boolean deleteReview(int reviewId) {
         String sql = "DELETE FROM Reviews WHERE reviewId=?";
         try (Connection conn = DriverManager.getConnection(url, dbID, dbPW);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setBigDecimal(1, reviewId);
+            pstmt.setInt(1, reviewId);
             int result = pstmt.executeUpdate();
             return result > 0;
         } catch (SQLException e) {
@@ -112,7 +112,7 @@ public class Review {
     }
 
     // 6. 사용자별 리뷰 통계 조회
-    public static Object[][] getUserStats(BigDecimal userId) {
+    public static Object[][] getUserStats(int userId) {
         String sql =
             "SELECT r.userId, r.institutionId, (SELECT COUNT(*) FROM Reviews r3 WHERE r3.userId = r.userId) AS reviewCount, AVG(rating), " +
             "       (SELECT AVG(r2.rating) FROM Reviews r2 WHERE r2.userId = r.userId) AS userAvgRating " +
@@ -122,7 +122,7 @@ public class Review {
             "HAVING COUNT(*) >= 1 ";
         try (Connection conn = DriverManager.getConnection(url, dbID, dbPW);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setBigDecimal(1, userId);
+            pstmt.setInt(1, userId);
             try (ResultSet rs = pstmt.executeQuery()) {
                 return resultSetToArray(rs);
             }
